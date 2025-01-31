@@ -28,3 +28,15 @@ resource "aws_subnet" "fjfs-subnet-pub-1b" {
     }
   )
 }
+
+
+resource "aws_route_table_association" "fjfs-public-subnet-1a" {
+  subnet_id      = aws_subnet.fjfs-subnet-pub-1a.id
+  route_table_id = aws_route_table.eks-public-route-table.id
+}
+
+
+resource "aws_route_table_association" "fjfs-public-subnet-1b" {
+  subnet_id      = aws_subnet.fjfs-subnet-pub-1b.id
+  route_table_id = aws_route_table.eks-public-route-table.id
+}
