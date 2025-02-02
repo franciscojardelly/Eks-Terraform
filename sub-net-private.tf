@@ -26,3 +26,14 @@ resource "aws_subnet" "fjfs-subnet-priv-1b" {
     }
   )
 }
+
+
+resource "aws_route_table_association" "fjfs-pivrate-subnet-1a" {
+  subnet_id      = aws_subnet.fjfs-subnet-priv-1a.id
+  route_table_id = aws_route_table.eks-private-route-table-1a.id
+}
+
+resource "aws_route_table_association" "fjfs-pivrate-subnet-1b" {
+  subnet_id      = aws_subnet.fjfs-subnet-priv-1b.id
+  route_table_id = aws_route_table.eks-private-route-table-1b.id
+}
