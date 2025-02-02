@@ -5,7 +5,7 @@ resource "aws_subnet" "fjfs-subnet-pub-1a" {
   map_public_ip_on_launch = true
 
   tags = merge(
-    local.tags,
+    var.tags,
     {
       Name                     = "${var.project_name}-subnet-pub-1a",
       "kubernetes.io/role/elb" = 1
@@ -21,7 +21,7 @@ resource "aws_subnet" "fjfs-subnet-pub-1b" {
   map_public_ip_on_launch = true
 
   tags = merge(
-    local.tags,
+    var.tags,
     {
       Name                     = "${var.project_name}-subnet-pub-1b",
       "kubernetes.io/role/elb" = 1
