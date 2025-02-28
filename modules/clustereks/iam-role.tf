@@ -23,3 +23,8 @@ resource "aws_iam_role" "fjfs-eks-cluster-role" {
     }
   )
 }
+
+resource "aws_iam_role_policy_attachment" "fjfs-eks-role-attachement" {
+  role       = aws_iam_role.fjfs-eks-cluster-role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+}
