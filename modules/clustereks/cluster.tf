@@ -3,11 +3,20 @@ resource "aws_eks_cluster" "fjfs-eks-cluster" {
 
 
   access_config {
-    authentication_mode = "API"
+    authentication_mode = "API_AND_CONFIG_MAP"
   }
 
   role_arn = aws_iam_role.fjfs-eks-cluster-role.arn
-  version  = "1.31"
+  version  = "1.32"
+
+  ## Bloco para habilitar logs do kubernetes no cloudwatch.  
+  #enabled_cluster_log_types = [
+  #  "api",
+  #  "audit",
+  #  "authenticator",
+  #  "controllerManager",
+  #  "scheduler"
+  #]
 
   vpc_config {
     subnet_ids = [
@@ -31,29 +40,4 @@ resource "aws_eks_cluster" "fjfs-eks-cluster" {
       Name = "${var.project_name}"
     }
   )
-
 }
-
-#resource "aws_iam_role" "cluster" {
-#  name = "eks-cluster-example"
-#  assume_role_policy = jsonencode({
-#    Version = "2012-10-17"
-#    Statement = [
-#      {
-#        Action = [
-#          "sts:AssumeRole",
-#          "sts:TagSession"
-#        ]
-#        Effect = "Allow"
-#        Principal = {
-#          Service = "eks.amazonaws.com"
-#        }
-#      },
-#    ]
-#  })
-#}
-
-#resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
-#  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-#  role       = aws_iam_role.cluster.name
-#}
