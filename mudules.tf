@@ -21,3 +21,11 @@ module "managed_node_group" {
   subnet_private_1a = module.eks_network.fjfs-subnet-priv-1a
   subnet_private_1b = module.eks_network.fjfs-subnet-priv-1b
 }
+
+module "eks_aws_lb_controller" {
+  source       = "./modules/aws-lb-controller"
+  project_name = var.project_name
+  tags         = local.tags
+  oidc         = module.eks_cluster.oidc
+  cluster_name = module.eks_cluster.eks-cluster-name
+}

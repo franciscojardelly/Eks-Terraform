@@ -8,6 +8,13 @@ resource "aws_eks_node_group" "fjfs-eks-mng" {
 
   ]
 
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.project_name}-eks-mng"
+    }
+  )
+
   scaling_config {
     desired_size = 1
     max_size     = 1
